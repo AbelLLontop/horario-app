@@ -31,13 +31,13 @@ const WeekCoursesContent = styled.div`
     .hours{
       width: 4rem;
       text-align: center;
-      font-weight: bold;
+      font-weight: bold; 
       font-family: calibri;
     }
   }
 
 `;
-
+ 
 const Lines= () => {
 const lines = [];
   for(let i = 0; i < 14; i++){

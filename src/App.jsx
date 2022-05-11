@@ -1,122 +1,135 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import DayCourses from './components/Timetable/DayCourses';
 import WeekCourses from './components/Timetable/WeekCourses';
 import { parseCourses } from './utilities/parseCourses';
-const formato = {
-  id: 1,
-  name: 'Curso 1',
-  startTime: 5,
-  time: 1,
-  day: 'jueves',
-}
 
+
+
+
+
+const formato = {
+    id: 1,
+    startTime: 7,
+    time: 1,
+    day: 'lunes',
+    show: true,
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+    data:{
+      name: 'Curso 1',
+      codigo: 'A',
+      profesor: 'Profesor 1',
+      type: 'Laboratorio',	
+      group: 'Grupo 1',
+    }
+};
 
 const cursos = [
   {
     id: 1,
-    name: 'Curso 1',
-    startTime: 1,
+    startTime: 7,
     time: 1,
-    day: 'lunes'
-  },
-  {
-    id: 15,
-    name: 'Curso 11',
-    startTime: 1,
-    time: 1,
-    day: 'jueves'
-  },
+    day: 'lunes',
+    show: true,
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+    data:{
+      name: 'Curso 1',
+      codigo: 'A',
+      profesor: 'Profesor 1',
+      type: 'Laboratorio',	
+      group: 'Grupo 1',
+    }
+},
   {
     id: 2,
-    name: 'Curso 2',
     startTime: 7,
     time: 1,
-    day: 'lunes',
-  },
-
+    day: 'martes',
+    show: true,
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+    data:{
+      name: 'Curso 1',
+      codigo: 'A',
+      profesor: 'Profesor 1',
+      type: 'Laboratorio',	
+      group: 'Grupo 1',
+    }
+},
+  {
+    id: 3,
+    startTime: 7,
+    time: 1,
+    day: 'miercoles',
+    show: true,
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+    data:{
+      name: 'Curso 1',
+      codigo: 'A',
+      profesor: 'Profesor 1',
+      type: 'Laboratorio',	
+      group: 'Grupo 1',
+    }
+},
   {
     id: 4,
-    name: 'Curso 4',
-    startTime: 3,
-    time: 4,
-    day: 'lunes',
-  },
-  {
-    id: 5,
-    name: 'Curso 5',
-    startTime: 1,
-    time: 4,
-    day: 'martes',
-  },
-  {
-    id: 6,
-    name: 'Curso 6',
-    startTime: 5,
-    time: 1,
-    day: 'lunes',
-  },
-  {
-    id: 7,
-    name: 'Curso 7',
     startTime: 7,
     time: 1,
-    day: 'lunes',
-  },
-  
+    day: 'jueves',
+    show: true,
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+    data:{
+      name: 'Curso 1',
+      codigo: 'A',
+      profesor: 'Profesor 1',
+      type: 'Laboratorio',	
+      group: 'Grupo 1',
+    }
+},
   {
-    id: 9,
-    name: 'Curso 9',
-    startTime: 3,
-    time: 4,
-    day: 'miercoles',
-  },
-  {
-    id: 10,
-    name: 'Curso 10',
-    startTime: 1,
-    time: 4,
+    id: 5,
+    startTime: 7,
+    time: 1,
     day: 'viernes',
-  },
+    show: true,
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+    data:{
+      name: 'Curso 1',
+      codigo: 'A',
+      profesor: 'Profesor 1',
+      type: 'Laboratorio',	
+      group: 'Grupo 1',
+    }
+}
 ];
 
 function App() {
-  const [courses, setCourses] = useState([])
-  const {horarioJson} =useParams();
-  
+  const [courses, setCourses] = useState([]);
+  const { horarioJson } = useParams();
+
+
   useEffect(() => {
-    const parseHorario = JSON.parse(horarioJson);
-    console.log('cursos sin transformar')
+    // const parseHorario = JSON.parse(horarioJson);
+    // const parseHorario2 = parseHorario.map(curso => {
+    //   const timeInteger = parseInt(curso.time);
+    //   return {
+    //     ...curso,
+    //     time: timeInteger,
+    //   }
+    // })
 
-    //console.log(cursos)
-    const parseHorario2 = parseHorario.map(curso => {
-      const timeInteger = parseInt(curso.time);
-      return {
-        ...curso,
-        time: timeInteger,
-      }
-    })
+    // const final = parseCourses(parseHorario2);
+    const final = parseCourses(cursos);
+    console.log(final);
 
-
-    console.log(parseHorario2)
-    console.log(cursos)
-   
-    
-    const final = parseCourses(parseHorario2);
-    const cursosFiltrados = parseCourses(cursos);
-   console.log('cursos transformados')
-    console.log(final)
-    console.log(cursosFiltrados)
-
-
-    setCourses(final)
+    setCourses(final);
   }, [horarioJson]);
 
- 
-
-
-  return <WeekCourses cursos={courses}/>
-
+  return <WeekCourses cursos={courses} />;
 }
 
 export default App;

@@ -1,26 +1,26 @@
-import { weekFilter } from './parseCourseForDay';
+import { separateCourseForDay } from './separateCourseForDay';
 import { parseCoursesForPaint } from './ParseCoursesForPaint';
+import { DAYS } from './days';
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-const dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes','Sabado'];
 
 export const parseCourses = (courses) => {
-  let weekFiltered = weekFilter(courses);
+  const {coursesFilteredForDay,maxDay,minMaxHour} = separateCourseForDay(courses);
+  console.log(coursesFilteredForDay)
   let coursesFiltered = [];
-  for (let i = 0; i < dias.length; i++) {
+  for (let i = 0; i < maxDay; i++) {
+  
     let filterDay = {
-      day: dias[i],
+      day: DAYS[i].charAt(0) + DAYS[i].toLowerCase().slice(1),
       courses: {_numColumns: 1, _cursosFiltrados:[]},
     };
-    for (let day in weekFiltered) {
-      if (day.toLocaleUpperCase() === dias[i].toLocaleUpperCase()) {
-        filterDay.courses = parseCoursesForPaint(weekFiltered[day]);
-      }
-     
-    }
-    coursesFiltered.push(filterDay);
-  }
 
+    if(coursesFilteredForDay[DAYS[i]]){
+      filterDay.courses = parseCoursesForPaint(coursesFilteredForDay[DAYS[i]]); 
+    }
+  
+    coursesFiltered.push(filterDay);
+  
+  }
 
   return coursesFiltered;
 };

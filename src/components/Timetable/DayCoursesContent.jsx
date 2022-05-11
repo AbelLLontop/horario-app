@@ -10,7 +10,7 @@ box-sizing: border-box;
 position: relative;
 .linesV{
   position: absolute;
-    display: grid;
+    display: grid; 
     grid-template-columns:repeat(${(props) => props._numColumns}, 1fr);
     left: 0;
     top: 0;
@@ -47,4 +47,4 @@ grid-row: ${(props) => props.startTime-6} / span ${(props) => props.time};
 h1 {
   font-weight: normal;
 }
-`;
+`; 

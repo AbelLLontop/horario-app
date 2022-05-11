@@ -1,5 +1,4 @@
 
-import useparseCoursesForPaint from "../../hooks/useparseCoursesForPaint";
 import Course from "../Course/Course";
 import { DayCoursesContent, Element } from "./DayCoursesContent";
 
