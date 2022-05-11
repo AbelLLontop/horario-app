@@ -28,7 +28,7 @@ const DayCourses = ({cursos=[],day}) => {
 
     return (
       <DayContent day={day}>
-      <DayCoursesContent>
+      <DayCoursesContent _numColumns={_numColumns}>
         <div className="linesV">
           <span></span>
           <span></span>

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import DayCourses from './components/Timetable/DayCourses';
 import WeekCourses from './components/Timetable/WeekCourses';
 import { parseCourses } from './utilities/parseCourses';
@@ -15,10 +16,16 @@ const cursos = [
   {
     id: 1,
     name: 'Curso 1',
-    startTime: 5,
+    startTime: 1,
     time: 1,
-    day: 'jueves',
-    color: '#ff0000'
+    day: 'lunes'
+  },
+  {
+    id: 15,
+    name: 'Curso 11',
+    startTime: 1,
+    time: 1,
+    day: 'jueves'
   },
   {
     id: 2,
@@ -27,13 +34,7 @@ const cursos = [
     time: 1,
     day: 'lunes',
   },
-  {
-    id: 3,
-    name: 'Curso 3',
-    startTime: 1,
-    time: 4,
-    day: 'martes',
-  },
+
   {
     id: 4,
     name: 'Curso 4',
@@ -53,7 +54,7 @@ const cursos = [
     name: 'Curso 6',
     startTime: 5,
     time: 1,
-    day: 'miercoles',
+    day: 'lunes',
   },
   {
     id: 7,
@@ -62,13 +63,7 @@ const cursos = [
     time: 1,
     day: 'lunes',
   },
-  {
-    id: 8,
-    name: 'Curso 8',
-    startTime: 1,
-    time: 4,
-    day: 'lunes',
-  },
+  
   {
     id: 9,
     name: 'Curso 9',
@@ -86,8 +81,38 @@ const cursos = [
 ];
 
 function App() {
+  const [courses, setCourses] = useState([])
+  const {horarioJson} =useParams();
+  
+  useEffect(() => {
+    const parseHorario = JSON.parse(horarioJson);
+    console.log('cursos sin transformar')
 
-  const [courses, setCourses] = useState(parseCourses(cursos))
+    //console.log(cursos)
+    const parseHorario2 = parseHorario.map(curso => {
+      const timeInteger = parseInt(curso.time);
+      return {
+        ...curso,
+        time: timeInteger,
+      }
+    })
+
+
+    console.log(parseHorario2)
+    console.log(cursos)
+   
+    
+    const final = parseCourses(parseHorario2);
+    const cursosFiltrados = parseCourses(cursos);
+   console.log('cursos transformados')
+    console.log(final)
+    console.log(cursosFiltrados)
+
+
+    setCourses(final)
+  }, [horarioJson]);
+
+ 
 
 
   return <WeekCourses cursos={courses}/>

@@ -10,10 +10,12 @@ const CourseContent = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.color};
-  border-left:solid 2px black;
+  /* border-left:solid 2px black;
   border-top:solid 2px black;
-  border-bottom:solid 1px black;
+  border-bottom:solid 1px black; */
   box-sizing: border-box;
+  /* box-shadow: 0px 0px 11px 0px ${(props) => props.color} ;
+  border-radius: 10px; */
   opacity: .9;
   line-height: 16px;
   .nameCourse{
@@ -21,6 +23,9 @@ const CourseContent = styled.div`
     font-size: 18px;
     padding: 0;
     margin: 0;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .nameTypeCourse{
     text-transform: lowercase;

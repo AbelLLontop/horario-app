@@ -5,19 +5,20 @@ flex-grow: 1;
 
 box-sizing: border-box;
 display: grid;
-grid-template-rows: repeat(7, 4rem);
+grid-template-rows: repeat(14,4rem);
 box-sizing: border-box;
 position: relative;
 .linesV{
   position: absolute;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:repeat(${(props) => props._numColumns}, 1fr);
     left: 0;
     top: 0;
     height: 100%;
     grid-template-rows: 1fr;
     width: 100%;
-    border-left: solid 2px #181818;
+    /* border-left: solid 2px #181818; */
+    box-sizing: border-box;
 }
 .linesV span{
   width: 100%;
@@ -42,7 +43,7 @@ ${(props) =>
     props.numColumns
   }`};
 
-grid-row: ${(props) => props.startTime} / span ${(props) => props.time};
+grid-row: ${(props) => props.startTime-6} / span ${(props) => props.time};
 h1 {
   font-weight: normal;
 }

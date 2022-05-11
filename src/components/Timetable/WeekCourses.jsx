@@ -18,7 +18,7 @@ const WeekCoursesContent = styled.div`
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: repeat(14,2rem);
+    grid-template-rows: repeat(14,4rem);
     z-index: -1;
   }
   .lines span{
