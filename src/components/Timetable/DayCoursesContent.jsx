@@ -5,7 +5,7 @@ flex-grow: 1;
 
 box-sizing: border-box;
 display: grid;
-grid-template-rows: repeat(14,4rem);
+grid-template-rows: repeat(${(props) => (props.max-props.min)},3rem);
 box-sizing: border-box;
 position: relative;
 .linesV{
@@ -34,6 +34,7 @@ position: relative;
 export const Element = styled.div`
 box-sizing: border-box;
 font-family: calibri;
+z-index: 9;
 width: 100%;
 height: 100%;
 ${(props) =>
@@ -43,7 +44,7 @@ ${(props) =>
     props.numColumns
   }`};
 
-grid-row: ${(props) => props.startTime-6} / span ${(props) => props.time};
+grid-row: ${(props) => props.startTime-(props.min -1)} / span ${(props) => props.time};
 h1 {
   font-weight: normal;
 }

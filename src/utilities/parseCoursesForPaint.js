@@ -1,15 +1,16 @@
-
 const validateCollition = (startTime, time, course) => {
   let validate = false;
-  if (
-    course.startTime === startTime ||
-    course.startTime + course.time === startTime + time ||
-    (course.startTime > startTime && course.startTime < startTime + time) ||
-    (course.startTime + course.time > startTime &&
-      course.startTime + course.time < startTime + time) ||
-    (course.startTime < startTime &&
-      course.startTime + course.time > startTime + time)
-  ) {
+  const top = course.startTime;
+  const bottom = course.startTime + course.time;
+  const top2 = startTime;
+  const bottom2 = startTime + time;
+
+  let validate1 = top === top2 || bottom === bottom2;
+  let validate2 = top > top2 && top < bottom2;
+  let validate3 = bottom > top2 && bottom < bottom2;
+  let validate4 = top < top2 && bottom > bottom2;
+
+  if (validate1 || validate2 || validate3 || validate4) {
     validate = true;
   }
   return validate;
@@ -27,23 +28,35 @@ const searchCollision = (startTime, time, courses) => {
   }
   return collision;
 };
-const searchCollision2 = (startTime, time, courses, courseCurrent = 0) => {
-  let collision = false;
 
+const validateStretch = (course, courses, courseCurrent = 0) => {
+  let stretch = true;
+  const { startTime, time } = course;
   for (let i = courseCurrent; i < courses.length; i++) {
     if (i != courseCurrent) {
       let course = courses[i];
       if (validateCollition(startTime, time, course)) {
-        collision = true;
+        stretch = false;
         break;
       }
     }
   }
-  return collision;
+  return stretch;
+};
+
+const stretchCourses = (courses) => {
+  for (let i = 0; i < courses.length; i++) {
+    let course = courses[i];
+    const stretch = validateStretch(course, courses, i);
+    if (stretch) {
+      course.stretch = true;
+    }
+  }
 };
 
 export const parseCoursesForPaint = (cursos) => {
-  let columns = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  let columns = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [] };
+
   for (let i = 0; i < cursos.length; i++) {
     for (let j in columns) {
       if (!searchCollision(cursos[i].startTime, cursos[i].time, columns[j])) {
@@ -62,18 +75,7 @@ export const parseCoursesForPaint = (cursos) => {
     }
   }
 
-  for (let i = 0; i < _cursosFiltrados.length; i++) {
-    let course = _cursosFiltrados[i];
-    const collision = searchCollision2(
-      course.startTime,
-      course.time,
-      _cursosFiltrados,
-      i
-    );
-    if (!collision) {
-      course.stretch = true;
-    }
-  }
+  stretchCourses(_cursosFiltrados);
 
   return { _numColumns, _cursosFiltrados };
 };

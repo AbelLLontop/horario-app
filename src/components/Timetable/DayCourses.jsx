@@ -22,15 +22,26 @@ const DayContent = styled.div`
  
 `
 
-const DayCourses = ({cursos=[],day}) => {
+
+const generateLinesVertical= ({size}) => {
+  const lines = [];
+    for(let i = 0; i < size; i++){
+     lines.push(<span key={i}></span>)
+    }
+    return lines;
+  }
+
+
+const DayCourses = ({cursos=[],day, min, max }) => {
     const {_numColumns,_cursosFiltrados} = cursos;
 
     return (
       <DayContent day={day}>
-      <DayCoursesContent _numColumns={_numColumns}>
+      <DayCoursesContent _numColumns={_numColumns} min={min} max={max}>
         <div className="linesV">
-          <span></span>
-          <span></span>
+          {
+            generateLinesVertical({size:_numColumns})
+          }
         </div>
         {_cursosFiltrados?.map((course) => (
           <Element
@@ -40,14 +51,15 @@ const DayCourses = ({cursos=[],day}) => {
             column={course.column}
             numColumns={_numColumns}
             stretch={course.stretch}
+            min={min}
           >
-           <Course course={course} />
+           <Course course={course?.data} />
           </Element>
         ))}
       </DayCoursesContent>
-  
       </DayContent>
     );
+
   };
   
  

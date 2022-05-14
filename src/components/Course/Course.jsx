@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { colorHEX } from '../../utilities/generatorColorRandom';
+import { HoraryColorsContext } from '../../contexts/HoraryContext';
 
 const CourseContent = styled.div`
   display: flex;
@@ -8,47 +8,57 @@ const CourseContent = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  position: relative;
   height: 100%;
   background-color: ${(props) => props.color};
+  transition: all 0.2s ease;
   //borders
   /* border-left:solid 2px black;
   border-top:solid 2px black;
   border-bottom:solid 1px black; */
 
   //shadow effects
-  box-shadow: 0px 0px 11px 0px ${(props) => props.color} ;
+  /* box-shadow: 0px 0px 11px 0px ${(props) => props.color};
   border-radius: 6px;
   box-sizing: border-box;
   opacity: 0.9;
-
-
+  color: black; */
 
   line-height: 16px;
   .nameCourse {
-    font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     padding: 0;
+    font-weight: bold;
     margin: 0;
-    max-width: 100px;
+    max-width: 98%;
     text-overflow: ellipsis;
     overflow: hidden;
+    text-align: center;
   }
   .nameTypeCourse {
-    text-transform: lowercase;
+    text-transform: uppercase;
+    font-size: 13px;
+    text-align: center;
   }
   .nameProffesor {
-    font-style: italic;
+    font-size: 10px;
+    text-align: center;
   }
+ 
 `;
 
 const Course = ({ course }) => {
-  const { name } = course;
-  const colorH = colorHEX();
+  const { codigo, group, name, profesor, type } = course;
+  const { colorHorary } = useContext(HoraryColorsContext);
+  const colorH = `${colorHorary[codigo].backgroundColor}`;
   return (
-    <CourseContent color={colorH}>
+    <CourseContent color={colorH} >
       <span className="nameCourse">{name}</span>
-      <span className="nameTypeCourse">Teori1</span>
-      <span className="nameProffesor">Profesor</span>
+      <span className="nameTypeCourse">
+        {type}-{group}
+      </span>
+    <span className="nameProffesor">{profesor}</span>
+    
     </CourseContent>
   );
 };
