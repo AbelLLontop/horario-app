@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { HoraryContext, SetHoraryColorsContext, SetHoraryContext } from '../contexts/HoraryContext';
+import { generateMapColorsForGroup } from '../utilities/generateMapColorsForGroup';
 
 import { parseCourses } from '../utilities/parseCourses';
 
@@ -95,13 +96,14 @@ const useHorarioActions = () => {
   const  horaryDispath  = useContext(SetHoraryContext);
   const colorHoraryDispath  = useContext(SetHoraryColorsContext);
   const { horarioJson } = useParams();
-  const [stateMinMaxHour, setStateMinMaxHour] = useState({min: 0, max: 0});
 
+ 
+  const [stateMinMaxHour, setStateMinMaxHour] = useState({min: 0, max: 0})
   useEffect(() => {
     if (horarioJson) {
       const parseHorario = JSON.parse(horarioJson);
-
-      const parseHorario2 = parseHorario.map((curso) => {
+ 
+      const horaryFormatted = parseHorario.map((curso) => {
         const timeInteger = parseInt(curso.time);
         return {
           data: {
@@ -118,16 +120,14 @@ const useHorarioActions = () => {
           time: timeInteger,
         };
       });
-
     
+      const colorsGroup = generateMapColorsForGroup(horaryFormatted);
 
-      horaryDispath({ type: 'SET_ALL_COURSES', payload: parseHorario2 });
-     // setCourses(coursesFiltered);
+      horaryDispath({ type: 'SET_ALL_COURSES', payload: horaryFormatted });
     }
   }, [horarioJson]);
 
   useEffect(() => {
-   
     const { coursesFiltered, groupsWitchColors,minMaxHour } =parseCourses(horary.courses);
     colorHoraryDispath({ type: 'SET_COLOR_ALL', payload: groupsWitchColors });
     colorHoraryDispath({ type: 'SET_FIRST_HOUR', payload: minMaxHour.min });
@@ -136,7 +136,6 @@ const useHorarioActions = () => {
     colorHoraryDispath({ type: 'SET_COLOR_ALL', payload: groupsWitchColors });
 
     setCourses(coursesFiltered);
-    console.log(courses)
   }, [horary]);
 
   return [courses,stateMinMaxHour];

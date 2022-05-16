@@ -28,7 +28,7 @@ const initialHorary = {
         group: 'Grupo 1',
       },
     },
-    {
+    {  
       id: 2,
       startTime: 7,
       time: 1,

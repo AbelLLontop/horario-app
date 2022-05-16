@@ -4,6 +4,7 @@ import { parseCoursesForPaint } from './parseCoursesForPaint';
 import { DAYS } from './days';
 
 export const parseCourses = (courses) => {
+  console.log(courses)
   const coursesFilteredForDay = separateCourseForDay(courses);
   const { maxDay,minMaxHour } = extractMaxDayminMaxHour(courses);
   const groupsWitchColors = getGroupsWitchColorsRandom(courses);

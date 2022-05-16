@@ -8,7 +8,7 @@ export const getGroupsWitchColorsRandom = (courses) => {
     if (!groups[codigo]) {
       groups[codigo] = {
         // backgroundColor: colorHEX(),
-          backgroundColor: '#e4e4e4',
+        backgroundColor: '#e4e4e4',
         color:'black'
         
       };

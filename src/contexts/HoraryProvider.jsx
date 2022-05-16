@@ -6,6 +6,7 @@ import { horarioColorReducer, horaryReducer, initialColorsHorary, initialHorary 
 
 const HoraryProvider = ({children}) => {
 const [horary,horaryDispath] = useReducer(horaryReducer,initialHorary);
+console.log(horary)
 const [colorHorary,colorHoraryDispath] = useReducer(horarioColorReducer,initialColorsHorary);
 
 // const setters = useMemo(()=>({
