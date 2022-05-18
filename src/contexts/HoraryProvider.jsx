@@ -1,30 +1,22 @@
-import React, { useMemo, useReducer } from 'react'
-import { HoraryColorsContext, HoraryContext, SetHoraryColorsContext, SetHoraryContext } from './HoraryContext'
-import { horarioColorReducer, horaryReducer, initialColorsHorary, initialHorary } from './HoraryReducer'
+import React, {useState } from 'react';
+import {
+  PreProcessContext,
+  SetPreProcessContext,
+} from './HoraryContext';
 
 
+const HoraryProvider = ({ children }) => {
 
-const HoraryProvider = ({children}) => {
-const [horary,horaryDispath] = useReducer(horaryReducer,initialHorary);
-console.log(horary)
-const [colorHorary,colorHoraryDispath] = useReducer(horarioColorReducer,initialColorsHorary);
+const [preProcessContext, setPreProcessContext] = useState([])
 
-// const setters = useMemo(()=>({
-//   horaryDispath,colorHoraryDispath
-// }),[horaryDispath,colorHoraryDispath]);
 
-return (
-    
-    <SetHoraryContext.Provider value={horaryDispath}>
-    <HoraryContext.Provider value={{horary}}>
-      <SetHoraryColorsContext.Provider value={colorHoraryDispath}>
-      <HoraryColorsContext.Provider value={{colorHorary}}>
-          {children}
-      </HoraryColorsContext.Provider>
-      </SetHoraryColorsContext.Provider>
-    </HoraryContext.Provider>
-    </SetHoraryContext.Provider>
-  )
-}
+  return (
+    <SetPreProcessContext.Provider value={setPreProcessContext}>
+      <PreProcessContext.Provider value={preProcessContext}>      
+                {children}
+      </PreProcessContext.Provider>
+    </SetPreProcessContext.Provider>
+  );
+};
 
-export default HoraryProvider
+export default HoraryProvider;

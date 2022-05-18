@@ -1,13 +1,12 @@
-import {extractMaxDayminMaxHour,getGroupsWitchColorsRandom,separateCourseForDay} from './separateCourseForDay';
+import {extractMaxDayminMaxHour,separateCourseForDay} from './separateCourseForDay';
 import { parseCoursesForPaint } from './parseCoursesForPaint';
 
 import { DAYS } from './days';
 
 export const parseCourses = (courses) => {
-  console.log(courses)
   const coursesFilteredForDay = separateCourseForDay(courses);
-  const { maxDay,minMaxHour } = extractMaxDayminMaxHour(courses);
-  const groupsWitchColors = getGroupsWitchColorsRandom(courses);
+   const { maxDay,minMaxHour } = extractMaxDayminMaxHour(courses);
+
   let coursesFiltered = [];
   for (let i = 0; i < maxDay; i++) {
     let filterDay = {
@@ -20,5 +19,5 @@ export const parseCourses = (courses) => {
     }
     coursesFiltered.push(filterDay);
   }
-  return {coursesFiltered,groupsWitchColors,minMaxHour};
+   return {coursesFiltered,minMaxHour};
 };

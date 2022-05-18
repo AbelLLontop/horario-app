@@ -1,0 +1,1 @@
+export const sizeRow = '2rem';

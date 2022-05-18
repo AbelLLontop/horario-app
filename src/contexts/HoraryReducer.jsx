@@ -6,6 +6,12 @@ const initialColorsHorary ={
     color: '#ffffff',
   }
 };
+const initialPreProcessContext ={
+  'a':{
+    backgroundColor: '#ff0000',
+    color: '#ffffff',
+  }
+};
 
 
 const initialHorary = {

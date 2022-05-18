@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-
+import { sizeRow } from '../../../config/const-styles';
+ 
 export const DayCoursesContent = styled.div`
-flex-grow: 1;
-
 box-sizing: border-box;
 display: grid;
-grid-template-rows: repeat(${(props) => (props.max-props.min)},3rem);
+grid-template-rows: repeat(${(props) => (props.max-props.min)},${sizeRow});
 box-sizing: border-box;
 position: relative;
 .linesV{
@@ -37,6 +36,7 @@ font-family: calibri;
 z-index: 9;
 width: 100%;
 height: 100%;
+
 ${(props) =>
   props.stretch &&
   props.column != props.numColumns &&
