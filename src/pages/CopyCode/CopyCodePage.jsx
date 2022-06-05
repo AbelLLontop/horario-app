@@ -1,9 +1,14 @@
 import React from 'react'
+import Slider from '../../components/Slider/Slider'
+import TimeTable from '../../components/Timetable'
+import CopyCodePageContent from './styled-components/CopyCodePageContent'
 
 const CopyCodePage = () => {
   return (
-    <div>CopyCodePage</div>
+    <CopyCodePageContent>
+      <TimeTable/>
+    </CopyCodePageContent>
   )
 }
 
-export default CopyCodePage
+export default CopyCodePage;
